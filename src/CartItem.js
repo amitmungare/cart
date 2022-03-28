@@ -14,7 +14,21 @@ class CartItem extends React.Component {
     }
 
     increaseQuantity = () => {
-        console.log('this', this)
+        
+        this.setState((prevState)=>{
+            return{
+                qty:prevState.qty+1
+            }
+        })
+    }
+
+    decreaseQuality = () => {
+        
+        this.setState((prevState)=>{
+            return{
+                qty:prevState.qty-1
+            }
+        })
     }
 
     render() {
@@ -47,6 +61,7 @@ class CartItem extends React.Component {
                             alt="decrease" 
                             className="action-icons" 
                             src="https://t4.ftcdn.net/jpg/01/07/62/09/240_F_107620985_YEVa8uBObxyKA2DkTSiDL6llE0m0Uzqt.jpg"
+                            onClick={this.decreaseQuality}
                         />
 
                         <img 

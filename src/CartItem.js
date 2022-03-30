@@ -2,18 +2,11 @@ import React from 'react';
 
 class CartItem extends React.Component {
 
-    constructor(){
-        super();
-        this.state={
-            price:999,
-            title:'phone',
-            qty:1,
-            img:''
-        }
-        // this.increaseQuantity = this.increaseQuantity.bind(this);
-    }
-
     increaseQuantity = () => {
+
+        // this.setState({
+        //     qty:this.state.qty + 1
+        // })
         
         this.setState((prevState)=>{
             return{
@@ -23,6 +16,12 @@ class CartItem extends React.Component {
     }
 
     decreaseQuality = () => {
+
+        const {qty} =this.state;
+
+        if(qty==0){
+            return;
+        }
         
         this.setState((prevState)=>{
             return{
@@ -33,14 +32,15 @@ class CartItem extends React.Component {
 
     render() {
 
-        const { price, title, qty } = this.state;
+        console.log(this.props);
+        const { price, title, qty } = this.props.product;
 
         return (
 
             <div className="cart-item">
 
                 <div className="left-block">
-                    <img style={styles.image} />
+                    <img style={styless.image} />
                 </div>
 
                 <div className="right-block">
@@ -68,6 +68,7 @@ class CartItem extends React.Component {
                             alt="delete" 
                             className="action-icons" 
                             src="https://t4.ftcdn.net/jpg/00/98/26/11/240_F_98261175_Sv69O3rZsHApYkjAdrWbgQixYHwyZyOr.jpg"
+                            onClick={this.handleClick}
                         />
 
                     </div>
@@ -78,12 +79,12 @@ class CartItem extends React.Component {
     }
 }
 
-const styles ={
+const styless ={
     image: {
         height:100,
         weight: 100,
         borderRadius: 4,
-        backgroundColor:'#ccc'
+        backgroundColor:'red'
     }
 }
 

@@ -7,6 +7,7 @@ class CartItem extends React.Component {
         // this.setState({
         //     qty:this.state.qty + 1
         // })
+        // amit
         
         this.setState((prevState)=>{
             return{

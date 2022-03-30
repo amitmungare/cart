@@ -2,38 +2,8 @@ import React from 'react';
 
 class CartItem extends React.Component {
 
-    increaseQuantity = () => {
-
-        // this.setState({
-        //     qty:this.state.qty + 1
-        // })
-        // amit
-        
-        this.setState((prevState)=>{
-            return{
-                qty:prevState.qty+1
-            }
-        })
-    }
-
-    decreaseQuality = () => {
-
-        const {qty} =this.state;
-
-        if(qty==0){
-            return;
-        }
-        
-        this.setState((prevState)=>{
-            return{
-                qty:prevState.qty-1
-            }
-        })
-    }
-
     render() {
 
-        console.log(this.props);
         const { price, title, qty } = this.props.product;
 
         return (

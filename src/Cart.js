@@ -30,6 +30,10 @@ class Cart extends React.Component {
         // this.increaseQuantity = this.increaseQuantity.bind(this);
     }
 
+    handleIncreaseQuantity = (products) => {
+        
+    }
+
     render() {
 
         const {products} =  this.state;
@@ -49,6 +53,5 @@ class Cart extends React.Component {
     }
     
 }
-//amit
 
 export default Cart;

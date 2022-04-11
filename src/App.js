@@ -17,6 +17,10 @@ class App extends React.Component {
   componentDidMount() {
     this.db
       .collection('products')
+      // .where('price', '>=', 90)
+      // .where('title', '==', 'car')
+      // .orderBy('price', 'desc')
+      .where('regions', 'in',[['west_coast', 'east_coast']])
       .onSnapshot((snapshot) => {
         const products = snapshot.docs.map((doc) => {
           const data = doc.data();
@@ -28,16 +32,26 @@ class App extends React.Component {
           loading: false
         })
       })
+
   }
 
   handleIncreaseQuantity = (product) => {
     const { products } = this.state;
     const index = products.indexOf(product);
-    products[index].qty += 1;
 
-    this.setState({
-      products
+    const docRef = this.db.collection('products').doc(products[index].id);
+
+    docRef
+    .update({
+      qty:products[index].qty+1
     })
+    .then(() =>{
+      console.log('Updated successfully +');
+    })
+    .catch((error)=>{
+      console.log('error',error);
+    })
+
   }
 
   handleDecreaseQuantity = (product) => {
@@ -46,20 +60,27 @@ class App extends React.Component {
 
     if (products[index].qty === 0) return;
 
-    products[index].qty -= 1;
+    const docRef = this.db.collection('products').doc(products[index].id);
 
-    this.setState({
-      products
+    docRef
+    .update({
+      qty:products[index].qty-1
+    })
+    .then(() =>{
+      console.log('Updated successfully -');
+    })
+    .catch((error)=>{
+      console.log('error',error);
     })
   }
 
   handelDeleteProduct = (id) => {
     const { products } = this.state;
-    const items = products.filter((item) => item.id !== id);
+    
+    const docRef = this.db.collection('products').doc(id);
 
-    this.setState({
-      products: items
-    })
+    
+
   }
 
   getCartCount = () => {
@@ -92,9 +113,10 @@ class App extends React.Component {
       .collection('products')
       .add({
         img:'',
-        price:800000,
-        qty:500,
-        title:'car'
+        price:800,
+        qty:10,
+        title:'bj',
+        regions: ["jingjinji", "hebei"]
       })
       .then((docRef)=>{
         console.log('product has been added', docRef);

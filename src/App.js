@@ -32,7 +32,7 @@ class App extends React.Component {
           loading: false
         })
       })
-
+      
   }
 
   handleIncreaseQuantity = (product) => {
@@ -79,7 +79,14 @@ class App extends React.Component {
     
     const docRef = this.db.collection('products').doc(id);
 
-    
+    docRef
+    .delete()
+    .then(() =>{
+      console.log('deleted successfully');
+    })
+    .catch((error)=>{
+      console.log('error',error);
+    })
 
   }
 
